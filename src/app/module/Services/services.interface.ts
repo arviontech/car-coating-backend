@@ -12,6 +12,11 @@ export interface IService {
   beforeImage: string[];
   afterImage: string[];
   imageGallery: string[];
+  bookingURL?: string;
+  questionURL?: string;
+  seoTitle?: string;
+  seoDescription?: string;
+  urlSlug?: string;
   tags?: string[];
   isDeleted: boolean;
 }
