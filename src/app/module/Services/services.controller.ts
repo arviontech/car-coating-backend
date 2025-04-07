@@ -27,4 +27,48 @@ const getAllServicesFromDB = CatchAsync(async (req, res) => {
   });
 });
 
-export const ServicesController = { createService, getAllServicesFromDB };
+const getSingleServiceFromDB = CatchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await ServicesService.getSingleServiceFromDB(id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Service fetched successfully',
+    data: result,
+  });
+});
+
+const updateService = CatchAsync(async (req, res) => {
+  const { id } = req.params;
+  const files = req.files as { [key: string]: Express.Multer.File[] };
+
+  const result = await ServicesService.updateService(id, req.body, files);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Service updated successfully',
+    data: result,
+  });
+});
+
+const deleteService = CatchAsync(async (req, res) => {
+  const { id } = req.params;
+
+  const result = await ServicesService.deleteService(id);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Service deleted (soft) successfully',
+    data: result,
+  });
+});
+
+export const ServicesController = {
+  createService,
+  getAllServicesFromDB,
+  getSingleServiceFromDB,
+  updateService,
+  deleteService,
+};
