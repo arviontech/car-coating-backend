@@ -37,3 +37,24 @@ export const createServiceValidationSchema = z.object({
     urlSlug: z.string().optional(),
   }),
 });
+
+export const updateServiceValidationSchema = z.object({
+  body: z.object({
+    serviceName: z.string().optional(),
+    shortDescription: z.string().optional(),
+    fullDescription: z.string().optional(),
+    price: z.number().optional(),
+    duration: z.string().optional(),
+    durationNote: z.string().optional(),
+    features: z.array(z.string()).optional(),
+    serviceInludes: z.array(z.string()).optional(),
+    processSteps: z.array(z.string()).optional(),
+    tags: z.array(z.string()).optional(),
+    bookingURL: z.string().optional(),
+    questionURL: z.string().optional(),
+    seoTitle: z.string().optional(),
+    seoDescription: z.string().optional(),
+    urlSlug: z.string().optional(),
+    isDeleted: z.boolean().optional(),
+  }),
+});
