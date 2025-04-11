@@ -1,4 +1,3 @@
-import { config } from '../../config';
 import CatchAsync from '../../utils/catchAsync';
 import { sendResponse } from '../../utils/sendResponse';
 import { AuthService } from './auth.services';
@@ -20,8 +19,8 @@ const loginUser = CatchAsync(async (req, res) => {
   res.cookie('refreshToken', refreshToken, {
     httpOnly: true,
     sameSite: 'none',
-    // domain: 'hospitalmanagement.atctechlimited.com',
-    secure: config.NODE_ENV === 'production',
+    // domain: 'cpc.atctechltd.com',
+    secure: true,
   });
   sendResponse(res, {
     statusCode: httpStatus.OK,
