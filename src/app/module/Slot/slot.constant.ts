@@ -9,34 +9,31 @@ export const bookedStatus = {
 export const slotDefine = (
   startTime: string,
   endTime: string,
-  serviceDuration: number,
+  serviceDuration: number, // in minutes
 ) => {
-  const convertedTime = (time: string) => {
-    const hoursMin = time.split(/[.:]/);
-    const convertNumberHours = Number(hoursMin[0]);
-    const convertNumberMin = Number(hoursMin[1]);
-    return convertNumberHours + convertNumberMin;
+  const toMinutes = (time: string) => {
+    const [hour, min] = time.split(':').map(Number);
+    return hour * 60 + min;
   };
 
-  const timeStart = convertedTime(startTime) * serviceDuration;
-  const timeEnd = convertedTime(endTime) * serviceDuration;
+  const minutesToTime = (min: number) => {
+    const h = Math.floor(min / 60)
+      .toString()
+      .padStart(2, '0');
+    const m = (min % 60).toString().padStart(2, '0');
+    return `${h}:${m}`;
+  };
 
-  const totalDurtation = timeEnd - timeStart;
-
-  const availableSlot = totalDurtation / serviceDuration;
-
+  const start = toMinutes(startTime);
+  const end = toMinutes(endTime);
   const slots = [];
-  for (let i = 0; i < availableSlot; i++) {
-    const slotStartTime = timeStart + i * serviceDuration;
-    const slotendTime = slotStartTime + serviceDuration;
 
-    const converMinsToHours = slotStartTime / serviceDuration;
-    const converMinsToMins = slotendTime / serviceDuration;
-
+  for (let t = start; t + serviceDuration <= end; t += serviceDuration) {
     slots.push({
-      startTime: `${converMinsToHours}:00`,
-      endTime: `${converMinsToMins}:00`,
+      startTime: minutesToTime(t),
+      endTime: minutesToTime(t + serviceDuration),
     });
   }
+
   return slots;
 };

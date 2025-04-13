@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { BookingStatus } from './slot.constant';
 
 const slotValidationSchema = z.object({
   body: z.object({
@@ -7,7 +6,6 @@ const slotValidationSchema = z.object({
     date: z.string().date(),
     startTime: z.string(),
     endTime: z.string(),
-    isBooked: z.enum([...BookingStatus] as [string, ...string[]]).optional(),
   }),
 });
 
