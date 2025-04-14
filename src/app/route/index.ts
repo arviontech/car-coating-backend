@@ -6,7 +6,7 @@ import { CustomerRoutes } from '../module/Customer/customer.route';
 import { ServicesRoutes } from '../module/Services/services.route';
 import { SlotRoutes } from '../module/Slot/slot.route';
 
-const router = Router();
+const middleWareRouter = Router();
 
 const moduleRoutes = [
   {
@@ -35,6 +35,6 @@ const moduleRoutes = [
   },
 ];
 
-moduleRoutes.forEach((route) => router.use(route.path, route.route));
+moduleRoutes.forEach((route) => middleWareRouter.use(route.path, route.route));
 
-export default router;
+export const MiddlewareRoutes = middleWareRouter;

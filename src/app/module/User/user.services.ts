@@ -109,6 +109,9 @@ const getMeFromDB = async (id: string, role: string) => {
   if (role === USER_ROLE.ADMIN) {
     result = await Admin.findOne({ id });
   }
+  if (role === USER_ROLE.SUPER_ADMIN) {
+    result = await User.findOne({ id });
+  }
 
   return result;
 };
