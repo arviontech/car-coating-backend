@@ -22,7 +22,7 @@ const auth = (...requiredRoles: (keyof typeof USER_ROLE)[]) => {
 
     const { role, id, iat } = decoded;
 
-    const user = await User.findOne({ id });
+    const user = await User.findById(id);
 
     if (!user) {
       throw new AppError(404, 'User not found');

@@ -104,13 +104,13 @@ const getSingleUserFromDB = async (id: string) => {
 const getMeFromDB = async (id: string, role: string) => {
   let result = null;
   if (role === USER_ROLE.CUSTOMER) {
-    result = await Customer.findOne({ id });
+    result = await Customer.findOne({ userId: id });
   }
   if (role === USER_ROLE.ADMIN) {
-    result = await Admin.findOne({ id });
+    result = await Admin.findOne({ userId: id });
   }
   if (role === USER_ROLE.SUPER_ADMIN) {
-    result = await User.findOne({ id });
+    result = await Admin.findOne({ userId: id });
   }
 
   return result;
